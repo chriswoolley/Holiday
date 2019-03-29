@@ -1,0 +1,13 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "Coliday"]
+	url = https://github.com/chriswoolley/Coliday.git
+	fetch = +refs/heads/*:refs/remotes/Coliday/*
+[gui]
+	wmstate = normal
+	geometry = 893x353+415+426 175 196

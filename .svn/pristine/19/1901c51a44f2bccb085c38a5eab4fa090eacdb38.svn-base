@@ -1,0 +1,431 @@
+﻿@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@model IEnumerable<Appointment>
+@inject UserManager<HolidayUser> userManager
+
+@{
+    bool isUserLoggedIn = ViewBag.Users != null;
+}
+
+<div class="row">
+
+    <h2></h2>
+
+    @(Html.DevExtreme().Scheduler()
+        .ID("scheduler")
+        .DataSource(Model)
+        .TextExpr("Description")
+        .StartDateExpr("StartDate")
+        .EndDateExpr("EndDate")
+        //.Disabled()
+        //                                                                    .Views(new SchedulerViewType[] { SchedulerViewType.Day, SchedulerViewType.TimelineMonth, SchedulerViewType.WorkWeek, SchedulerViewType.Week, SchedulerViewType.Agenda })
+        //.Views(new SchedulerViewType[] { SchedulerViewType.Week, SchedulerViewType.TimelineMonth })
+        .Views(new SchedulerViewType[] { SchedulerViewType.Week })
+        .CurrentView(SchedulerViewType.Week)
+        .CurrentDate(new DateTime(2019, 3, 7))
+        .FirstDayOfWeek(FirstDayOfWeek.Sunday)
+
+        .OnAppointmentClick("SetProtection")
+        .OnAppointmentDblClick("SetProtection")
+
+
+
+        .Option("editing.allowResizing", false)
+        .Option("editing.allowDragging", false)
+        //.Option("editing.allowDeleting", isUserLoggedIn)
+        //.Option("editing.allowAdding", isUserLoggedIn)
+        //.Option("editing.allowUpdating", isUserLoggedIn)
+        //.Disabled(new JS("testJs"))
+        //.OnContentReady("setDataSource")
+
+        //.OnAppointmentClick("CanWeEdit")
+        .OnAppointmentAdded("InsertData")
+
+        .OnAppointmentClick(@<text>
+            function(data) {
+            var value = data.value;
+            getSchedulerInstance().option("editing.allowUpdating", getTrue);
+            getSchedulerInstance().option("editing.allowDragging", getTrue);
+            getSchedulerInstance().option("editing.allowAdding", getTrue);
+            getSchedulerInstance().option("editing.allowUpdating", getTrue);
+
+            }
+        </text>)
+
+        .OnAppointmentDblClick(@<text>
+            function(data) {
+            var value = data.value;
+            getSchedulerInstance().option("editing.allowUpdating", getTrue);
+            getSchedulerInstance().option("editing.allowDragging", getTrue);
+            getSchedulerInstance().option("editing.allowAdding", getTrue);
+            getSchedulerInstance().option("editing.allowUpdating", getTrue);
+            }
+        </text>)
+
+        .OnAppointmentFormOpening(@<text>
+            function(data)
+            {
+            showToast("Deleted", e.appointmentData.Text, "warning");
+            var form =e.form;
+            form.itemOption("StartDate",{editorOptions:{format:"date"}})
+            }
+        </text>)
+
+
+
+        .StartDayHour(9)
+        .EndDayHour(18)
+        .CellDuration(120)
+        .MaxAppointmentsPerCell(5)
+
+        .OnAppointmentFormOpening("appointmentForm_created")
+
+        //.OnAppointmentAdded(@<text>
+        //function(e) {
+        //@*//InsertData(e.appointmentData.Text);*@
+        //InsertData(e.appointmentData);
+        //showToast("Added", e.appointmentData.StartDate, "success");
+        //}
+        //</text>)
+        .OnAppointmentUpdated(@<text>
+            function(e) {
+            showToast("Updated", e.appointmentData.Text, "info");
+            }
+        </text>)
+        .OnAppointmentDeleted(@<text>
+            function(e) {
+            showToast("Deleted", e.appointmentData.Text, "warning");
+            }
+        </text>)
+
+        .Resources(res =>
+        {
+            res.Add()
+.FieldExpr("StartPeriod")
+.AllowMultiple(false)
+.Label("Start Period")
+.DataSource
+(new object[] {
+
+new { id = 0, text = "Morning" },
+new { id = 1, text = "Afternoon" }});
+
+            res.Add()
+.FieldExpr("EndPeriod")
+.AllowMultiple(false)
+.Label("End Period")
+.DataSource
+(new object[] {
+new { id = 0, text = "Morning"},
+new { id = 1, text = "Afternoon"}});
+
+            res.Add()
+.FieldExpr("StatusKey")
+.AllowMultiple(false)
+.Label("Status")
+.DataSource
+(new object[] {
+new { id = 0, text = "Requested"},
+new { id = 1, text = "Confirmed"},
+new { id = 2, text = "Denied"}
+                                                                                                                                                                                                                                                                    });
+
+            res.Add()
+.FieldExpr("UserID")
+.AllowMultiple(false)
+.ColorExpr("colorHighlight")
+.Label("remove me")
+.DataSource(userManager.Users.ToList()).DisplayExpr("UserName").ValueExpr("Id");
+
+            res.Add()
+.FieldExpr("UserID")
+.AllowMultiple(false)
+.Label("User")
+.DataSource(userManager.Users.ToList()).DisplayExpr("UserName").ValueExpr("Id");
+
+        }
+        ).Height(580)
+    )
+</div>
+
+<script>
+
+    var HolidayAppointmentData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+    var Users = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(userManager.Users));
+
+    function getSchedulerInstance() {
+        return $("#scheduler").dxScheduler("instance");
+    }
+
+    function getAppointmentById(id) {
+        return DevExpress.data.query(HolidayAppointmentData)
+            .filter("AppointmentId", id)
+            .toArray()[0]
+    }
+
+
+    function SetProtection(data) {
+        scheduler = $("#scheduler").dxScheduler("instance");
+        //alert(scheduler);
+
+        //alway disabled
+        //scheduler.Option("editing.allowResizing", false);
+        //scheduler.Option("editing.allowDragging", false);
+
+        //scheduler.Option("editing.allowDeleting", true);
+        //scheduler.Option("editing.allowAdding", true);
+        //scheduler.Option("editing.allowUpdating", false);
+
+        //Depends on user
+        //scheduler.Option("editing.allowDeleting", true);
+        //scheduler.Option("editing.allowAdding", isUserLoggedIn);
+        //scheduler.Option("editing.allowUpdating", true);
+        //alert(scheduler.Option);
+    }
+
+
+    function appointmentForm_created(data) {
+        var form = data.form,
+            HolidayAppointment = getAppointmentById(data.appointmentData.AppointmentId) || {},
+            startDate = data.appointmentData.StartDate,
+            //endDate = data.appointmentData.EndDate;
+            endDate = data.appointmentData.EndDate,
+            users = Users;
+
+        form.option(
+            "items", [
+                {
+                    //dataField: "users.ID",
+                    dataField: "UserID",
+                    editorType: "dxSelectBox",
+                    editorOptions: {
+                        dataSource: Users,
+                        displayExpr: "UserName",
+                        valueExpr: "Id",
+                        value: HolidayAppointment.UserID,
+                    //                        startDate = args.value;
+                    //                        form.getEditor("EndDate")
+                    //                            .option("value", new Date(startDate.getTime() +
+                    //                                60 * 1000 * movie.Duration));
+
+                }
+            }
+            ,
+            {
+                dataField: "StartDate",
+                editorType: "dxDateBox",
+                name: "startDateEditor",
+                editorOptions: {
+                    value: startDate,
+                    width: "100%",
+                    type: "date",                  
+                    editorOptions: { format:"date"}, 
+                    onValueChanged: function (args) {
+                        startDate = args.value;
+                        //                        form.getEditor("EndDate")
+                        //                            .option("value", new Date(startDate.getTime() +
+                        //                                60 * 1000 * movie.Duration));
+                    }
+                }
+                }
+            ,
+            {
+                dataField: "StartPeriod",
+                editorType: "dxSelectBox",
+                editorOptions: {
+                    dataSource: [{ "ID": 0, "periodName": "Morning" }, { "ID": 1, "periodName": "Afternoon" }],
+                    valueExpr: "ID",
+                    displayExpr: "periodName",
+                    value: HolidayAppointment.StartPeriod,
+                    onValueChanged: function (args) {
+                        var startDate = data.appointmentData.StartDate;
+                        var startEditor = form.getEditor("startDate");
+                        var year = startDate.getFullYear();
+                        var month = startDate.getMonth();
+                        var day = startDate.getDate();
+                        if (args.value === 0) {
+                            data.appointmentData.startDate = new Date(year, month, day, 9, 0, 0, 0);
+
+                        }
+                        else {
+                            data.appointmentData.startDate = new Date(year, month, day, 13, 0, 0, 0);
+                        }
+                        var testDate = data.appointmentData.startDate;
+                        form.getEditor("startDateEditor").option("value", testDate);
+                        showToast("Holiday start time set to " + testDate, testDate, "info");
+                    }
+                }
+            }
+
+            ,
+            {
+                dataField: "EndDate",
+                editorType: "dxDateBox",
+                name: "endDateEditor",
+                editorOptions: {
+                    value: endDate,
+                    width: "100%",
+                    //type: "date",
+                    type: "datetime",
+                    onValueChanged: function (args) {
+                    //    startDate = args.value;
+                    //    //                        form.getEditor("EndDate")
+                    //    //                            .option("value", new Date(startDate.getTime() +
+                    //    //                                60 * 1000 * movie.Duration));
+                    }
+                }
+            }
+
+                ,
+                {
+                    dataField: "EndPeriod",
+                    editorType: "dxSelectBox",
+                    helpText: "when it ends",
+                    editorOptions: {
+                        dataSource: [{ "ID": 0, "periodName": "Morning" }, { "ID": 1, "periodName": "Afternoon" }],
+                        valueExpr: "ID",
+                        displayExpr: "periodName",
+                        value: HolidayAppointment.EndPeriod,
+                        onValueChanged: function (args) {
+                            var endDate = data.appointmentData.EndDate;
+                            var startEditor = form.getEditor("startDate");
+                            var year = startDate.getFullYear();
+                            var month = startDate.getMonth();
+                            var day = startDate.getDate();
+                            if (args.value === 0) {
+                                data.appointmentData.endDate = new Date(year, month, day, 13, 0, 0, 0);
+
+                            }
+                            else {
+                                data.appointmentData.endDate = new Date(year, month, day, 17, 0, 0, 0);
+                            }
+                            var testDate = data.appointmentData.endDate;
+                            form.getEditor("endDateEditor").option("value", testDate);
+                            showToast("Holiday finsh time set to " + testDate, testDate, "info");
+                        }
+                    }
+                }
+
+            ,
+            {
+                dataField: "StatusKey",
+                editorType: "dxSelectBox",
+                editorOptions: {
+                    dataSource: [{ "ID": 0, "Status": "Requested" }, { "ID": 1, "Status": "Granted" }, { "ID": 2, "Status": "Denied" }, { "ID": 3, "Status": "Delayed" }],
+                    valueExpr: "ID",
+                    displayExpr: "Status",
+                    value: HolidayAppointment.StartPeriod
+                    //                    onValueChanged: function (args) {
+                    //                        showToast("Posted", args.Id, "info");
+                    //                        startDate = args.value;
+                    //                        form.getEditor("EndDate")
+                    //                            .option("value", new Date(startDate.getTime() +
+                    //                                60 * 1000 * movie.Duration));
+                    //                    }
+                }
+                }
+
+                ,
+                {
+                    dataField: "Text",
+                    editorType: "dxTextArea",
+                    //height: "80px",
+                    editorOptions: {
+                        valueExpr: "Text",
+                        displayExpr: "Text",
+                        value: HolidayAppointment.Text
+                        //                    onValueChanged: function (args) {
+                        //                        showToast("Posted", args.Id, "info");
+                        //                        startDate = args.value;
+                        //                        form.getEditor("EndDate")
+                        //                            .option("value", new Date(startDate.getTime() +
+                        //                                60 * 1000 * movie.Duration));
+                        //                    }
+                    }
+                }
+
+            //,
+            //{
+            //    label: {
+            //        text: HolidayAppointment.AppointmentId + ":" + HolidayAppointment.StartPeriod +":"+ HolidayAppointment.EndPeriod
+            //    },
+            //    name: "users.UserName",
+            //    editorType: "dxTextBox",
+            //    editorOptions: {
+            //        value: users.UserName,
+            //        readOnly: true
+            //    }
+            //}
+        ]);
+    }
+
+    function showToast(event, value, type) {
+        //DevExpress.ui.notify(event + " \"" + value + "\"" + " task", type, 800);
+        DevExpress.ui.notify(event, 800);
+    }
+
+    function InsertData(e) {
+
+        var data = { // to be replaced with form values        
+//            AppointmentId: e.appointmentData.AppointmentId,
+            AppointmentId: 0,
+            Text: e.appointmentData.Text,
+            Description: e.appointmentData.Description,
+            StartDate: e.appointmentData.StartDate,
+            EndDate: e.appointmentData.EndDate,
+            AllDay: e.appointmentData.AllDay,
+            RecurrenceRule: e.appointmentData.RecurrenceRule,
+            DepartmentID: e.appointmentData.DepartmentID,
+            StatusKey: e.appointmentData.StatusKey,
+            UserID: e.appointmentData.UserID,
+            HolidaysTaken: e.appointmentData.HolidaysTaken,
+            Duration: e.appointmentData.Duration,
+            StartPeriod: e.appointmentData.StartPeriod,
+            EndPeriod: e.appointmentData.EndPeriod
+        };
+
+        //alert(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("Post", "Home")",
+            contentType: "application/json",
+            dataType: "json",
+            data:  JSON.stringify(data),
+            success: function (response) {
+                showToast("Insert new appointment", "", "");
+//                alert('done');
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+    function setDataSource(e) {
+        //this one fies the event
+        //$.post("Home/WebAPIService");
+        alert(1);
+        //var scheduler = $("#scheduler").dxScheduler("getDataSource");
+        var scheduler = $("#scheduler");
+        alert(2);
+        alert(scheduler);
+        @*var AppointmentData2 = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(DataA));*@
+//        $.post("ApiControllers/SchedulerData/Index");
+//        $.post("SchedulerData/Index");
+        //Controller("SchedulerData").GetJSONJQuery()
+        //AppointmentData = dataSource
+    }
+
+    function SelectAppointment(e) {
+      alert(dataSource.typeof);
+    }
+
+    function getTrue() {
+        return false
+    }
+
+    function getSchedulerInstance() {
+        return $("#scheduler").dxScheduler("instance");
+    }
+</script>

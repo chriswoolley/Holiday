@@ -1,0 +1,32 @@
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@model MainViewModel
+
+
+@{
+    Layout = "~/Views/Shared/_FrontPageLayout.cshtml";
+}
+@{
+    bool isUserLoggedIn = ViewBag.Users != null;
+}
+<p class=".bottom-two">
+    <div class="row">
+        <div class="column left dx-datagrid-filter-panel" style="width:auto">
+            @await Html.PartialAsync("~/Views/Home/_DepartmentList.cshtml", Model.DepartmentList)
+        </div>
+        <div class="column middle">
+            <div class="column left dx-datagrid-filter-panel" style="width:auto">
+                @await Html.PartialAsync("~/Views/Home/Scheduler.cshtml", Model.AppointmentList)
+            </div>
+        </div>
+        <div class="column right">
+            @await Html.PartialAsync("~/Views/User/_UserStatView.cshtml", Model.DepartmentUserList)
+        </div>
+    </div>
+</p>
+
+
+<script>
+    function showToast(event, value, type) {
+        DevExpress.ui.notify(event + " \"" + value + "\"" + " task", type, 800);
+    }
+</script>

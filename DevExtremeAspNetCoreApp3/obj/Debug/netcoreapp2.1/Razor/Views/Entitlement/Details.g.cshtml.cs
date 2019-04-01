@@ -155,12 +155,12 @@ else
             WriteLiteral("</td>\n            <td>\n                ");
             EndContext();
             BeginContext(730, 433, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cf08ea8f0917410eaf9a272fa1c33b02", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "87e17c9986cf4175bdf3b40db5a3f2c4", async() => {
                 BeginContext(808, 21, true);
                 WriteLiteral("\n                    ");
                 EndContext();
                 BeginContext(829, 98, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "65861eab0b6b42c6ab3ab9d5bc87fbba", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ace067985326450b993aad0f56a3f244", async() => {
                     BeginContext(919, 4, true);
                     WriteLiteral("Edit");
                     EndContext();
@@ -246,7 +246,7 @@ else
             WriteLiteral("\n    <p>\n        ");
             EndContext();
             BeginContext(1238, 63, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d522631066404d2f81bbc85d286d954a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5ae479d105f842f0a849391fc954fb01", async() => {
                 BeginContext(1285, 12, true);
                 WriteLiteral("Add New User");
                 EndContext();
@@ -269,7 +269,7 @@ else
             WriteLiteral("\n        ");
             EndContext();
             BeginContext(1310, 74, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dfbe440d0a564b1bbce68638a6f0a2c5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5199384c642146b6b244754e8f36b4b7", async() => {
                 BeginContext(1364, 16, true);
                 WriteLiteral("Copy to New Year");
                 EndContext();

@@ -15,7 +15,7 @@
 <script type="text/javascript">
     var currentUserId = '@runtime.currentUserId';
     var isSignedIn = '@(SignInManager.IsSignedIn(User))';
-    var adminSignedIn = '@(!(SignInManager.IsSignedIn(User) && User.IsInRole("ADMIN")))';
+    var adminSignedIn = '@(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))';
 </script>
 
 <div class="row">
@@ -160,7 +160,11 @@ new { id = 2, text = "Denied"}
         //ViewOnly = isSignedIn;
         ViewOnly = false;
 
-        showToast2("SelectUserId:" + SelectUserId + " test2:" + currentUserId + " HolidayAppointment.UserID:" + HolidayAppointment.UserID + " SelectTypeId:" + SelectTypeId);
+
+        //showToast2("ReadOnlyStatus:" + ReadOnlyStatus);
+//        showToast2("ReadOnlyStatus:" + ReadOnlyStatus);
+        showToast2("currentUserId:" + currentUserId + " isSignedIn:" + isSignedIn + " adminSignedIn:" + adminSignedIn);
+        //showToast2("SelectUserId:" + SelectUserId + " test2:" + currentUserId + " HolidayAppointment.UserID:" + HolidayAppointment.UserID + " SelectTypeId:" + SelectTypeId);
 
 
 
@@ -176,7 +180,7 @@ new { id = 2, text = "Denied"}
                         displayExpr: "UserName",
                         valueExpr: "Id",
                         value: SelectUserId,
-                        readOnly: ReadOnlyStatus
+//                        readOnly: ReadOnlyStatus
                 }
             }
             ,
@@ -276,7 +280,7 @@ new { id = 2, text = "Denied"}
                     valueExpr: "ID",
                     displayExpr: "Status",
                     value: SelectTypeId,
-                    readOnly: ReadOnlyStatus
+  //                  readOnly: ReadOnlyStatus
                 }
                 }
 

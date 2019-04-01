@@ -86,7 +86,7 @@ using DevExtreme.AspNet.Mvc;
             WriteLiteral("\r\n<h2>Manage claims for user</h2>\r\n\r\n");
             EndContext();
             BeginContext(71, 374, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9e53c2a228eb4ec5b740ea347838b7c5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "97ef6fa002fc420ea6b34c2f29c7a1a9", async() => {
                 BeginContext(132, 40, true);
                 WriteLiteral("\r\n    <input type=\"hidden\" name=\"userId\"");
                 EndContext();
@@ -101,12 +101,12 @@ WriteAttributeValue("", 180, Model.UserId, 180, 13, false);
                 WriteLiteral(" />\r\n    ");
                 EndContext();
                 BeginContext(203, 153, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("select", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0cc340a64a56486e9783aaf9678dbb25", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("select", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "08e2e26fa0b64c079dd4891cf2eb356e", async() => {
                     BeginContext(293, 10, true);
                     WriteLiteral("\r\n        ");
                     EndContext();
                     BeginContext(303, 38, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e84ed7c775c84eb0a5373008bf2e08e5", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "35369afb1249449da359561e07ccd883", async() => {
                         BeginContext(311, 21, true);
                         WriteLiteral("Please select a claim");
                         EndContext();
@@ -174,7 +174,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_SelectTagHelper.Items = (new SelectList(Mo
             WriteLiteral("\r\n\r\n");
             EndContext();
             BeginContext(449, 53, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "12b7e4bb43bd4b3db0e5544da56f08fe", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "de762e1209a94a61a6678db99e0948ee", async() => {
                 BeginContext(494, 4, true);
                 WriteLiteral("Done");
                 EndContext();

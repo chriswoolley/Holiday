@@ -13,10 +13,9 @@
 
 
 <script type="text/javascript">
-    var test2 = '@runtime.currentUserId';
-    //var test3 = '@(!(SignInManager.IsSignedIn(User) && User.IsInRole("ADMIN")))';
-    var test3 = '@(SignInManager.IsSignedIn(User))';
-    //var test3 = '@(!(SignInManager.IsSignedIn(User) && User.IsInRole("ADMIN")))';
+    var currentUserId = '@runtime.currentUserId';
+    var isSignedIn = '@(SignInManager.IsSignedIn(User))';
+    var adminSignedIn = '@(!(SignInManager.IsSignedIn(User) && User.IsInRole("ADMIN")))';
 </script>
 
 <div class="row">
@@ -37,7 +36,7 @@
 .TextExpr("Description")
 .StartDateExpr("StartDate")
 .EndDateExpr("EndDate")
-//.Disabled()
+//.Disabled($isSignedIn)
 //                                                                    .Views(new SchedulerViewType[] { SchedulerViewType.Day, SchedulerViewType.TimelineMonth, SchedulerViewType.WorkWeek, SchedulerViewType.Week, SchedulerViewType.Agenda })
 .Views(new SchedulerViewType[] { SchedulerViewType.Week })
 .CurrentView(SchedulerViewType.Week)
@@ -60,56 +59,55 @@
 
 .Resources(res =>
 {
-res.Add()
-.FieldExpr("StartPeriod")
-.AllowMultiple(false)
-.Label("Start Period")
-.DataSource
-(new object[] {
+    res.Add()
+    .FieldExpr("StartPeriod")
+    .AllowMultiple(false)
+    .Label("Start Period")
+    .DataSource
+    (new object[] {
 
 new { id = 0, text = "Morning" },
 new { id = 1, text = "Afternoon" }});
 
-res.Add()
-.FieldExpr("EndPeriod")
-.AllowMultiple(false)
-.Label("End Period")
-.DataSource
-(new object[] {
+    res.Add()
+    .FieldExpr("EndPeriod")
+    .AllowMultiple(false)
+    .Label("End Period")
+    .DataSource
+    (new object[] {
 new { id = 0, text = "Morning"},
 new { id = 1, text = "Afternoon"}});
 
-res.Add()
-.FieldExpr("StatusKey")
-.AllowMultiple(false)
-.Label("Status")
-.DataSource
-(new object[] {
+    res.Add()
+    .FieldExpr("StatusKey")
+    .AllowMultiple(false)
+    .Label("Status")
+    .DataSource
+    (new object[] {
 new { id = 0, text = "Requested"},
 new { id = 1, text = "Confirmed"},
 new { id = 2, text = "Denied"}
-                                                                                                                                                                                                                                            });
+                                                                                                                                                                                                                                                });
 
-res.Add()
-.FieldExpr("UserID")
-.AllowMultiple(false)
-.ColorExpr("colorHighlight")
-.Label("remove me")
-.DataSource(userManager.Users.ToList()).DisplayExpr("UserName").ValueExpr("Id");
+    res.Add()
+    .FieldExpr("UserID")
+    .AllowMultiple(false)
+    .ColorExpr("colorHighlight")
+    .Label("remove me")
+    .DataSource(userManager.Users.ToList()).DisplayExpr("UserName").ValueExpr("Id");
 
-res.Add()
-.FieldExpr("UserID")
-.AllowMultiple(false)
-.Label("User")
-.DataSource(userManager.Users.ToList()).DisplayExpr("UserName").ValueExpr("Id");
+    res.Add()
+    .FieldExpr("UserID")
+    .AllowMultiple(false)
+    .Label("User")
+    .DataSource(userManager.Users.ToList()).DisplayExpr("UserName").ValueExpr("Id");
 
 }
 ).Height(580)
 )
 
-
-    @currentID
-    @(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    currentid @currentID
+    signed in and admin @(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 </div>
 
 <script>
@@ -134,21 +132,6 @@ res.Add()
 
     function SetProtection(data) {
         scheduler = $("#scheduler").dxScheduler("instance");
-        //alert(scheduler);
-
-        //alway disabled
-        //scheduler.Option("editing.allowResizing", false);
-        //scheduler.Option("editing.allowDragging", false);
-
-        //scheduler.Option("editing.allowDeleting", true);
-        //scheduler.Option("editing.allowAdding", true);
-        //scheduler.Option("editing.allowUpdating", false);
-
-        //Depends on user
-        //scheduler.Option("editing.allowDeleting", true);
-        //scheduler.Option("editing.allowAdding", isUserLoggedIn);
-        //scheduler.Option("editing.allowUpdating", true);
-        //alert(scheduler.Option);
     }
 
 
@@ -163,18 +146,28 @@ res.Add()
         // set userId depending on insert or edit
         SelectUserId = "";
         if (HolidayAppointment.AppointmentId == undefined) {
-            SelectUserId = test2;
+            SelectUserId = currentUserId;
+            SelectTypeId = 0;
         }
         else {
             SelectUserId = HolidayAppointment.UserID;
+            SelectTypeId = HolidayAppointment.StatusKey;
         }
 
-        showToast2("SelectUserId:" + SelectUserId + " test2:" + test2 + " HolidayAppointment.UserID:" + HolidayAppointment.UserID);
+
+
+        ReadOnlyStatus = !adminSignedIn;
+        //ViewOnly = isSignedIn;
+        ViewOnly = false;
+
+        showToast2("SelectUserId:" + SelectUserId + " test2:" + currentUserId + " HolidayAppointment.UserID:" + HolidayAppointment.UserID + " SelectTypeId:" + SelectTypeId);
+
+
 
         form.option(
+
             "items", [
                 {
-                    //dataField: "users.ID",
                     dataField: "UserID",
                     editorType: "dxSelectBox",
                     name: "userEditor",
@@ -182,16 +175,8 @@ res.Add()
                         dataSource: Users,
                         displayExpr: "UserName",
                         valueExpr: "Id",
-//                        value: HolidayAppointment.UserID,
                         value: SelectUserId,
-                        readOnly: false
-                        
-
-                    //                        startDate = args.value;
-                    //                        form.getEditor("EndDate")
-                    //                            .option("value", new Date(startDate.getTime() +
-                    //                                60 * 1000 * movie.Duration));
-
+                        readOnly: ReadOnlyStatus
                 }
             }
             ,
@@ -206,9 +191,6 @@ res.Add()
                     editorOptions: { format:"date"},
                     onValueChanged: function (args) {
                         startDate = args.value;
-                        //                        form.getEditor("EndDate")
-                        //                            .option("value", new Date(startDate.getTime() +
-                        //                                60 * 1000 * movie.Duration));
                     }
                 }
                 }
@@ -249,13 +231,8 @@ res.Add()
                 editorOptions: {
                     value: endDate,
                     width: "100%",
-                    //type: "date",
                     type: "datetime",
                     onValueChanged: function (args) {
-                    //    startDate = args.value;
-                    //    //                        form.getEditor("EndDate")
-                    //    //                            .option("value", new Date(startDate.getTime() +
-                    //    //                                60 * 1000 * movie.Duration));
                     }
                 }
             }
@@ -298,14 +275,8 @@ res.Add()
                     dataSource: [{ "ID": 0, "Status": "Requested" }, { "ID": 1, "Status": "Granted" }, { "ID": 2, "Status": "Denied" }, { "ID": 3, "Status": "Delayed" }],
                     valueExpr: "ID",
                     displayExpr: "Status",
-                    value: HolidayAppointment.StartPeriod
-                    //                    onValueChanged: function (args) {
-                    //                        showToast("Posted", args.Id, "info");
-                    //                        startDate = args.value;
-                    //                        form.getEditor("EndDate")
-                    //                            .option("value", new Date(startDate.getTime() +
-                    //                                60 * 1000 * movie.Duration));
-                    //                    }
+                    value: SelectTypeId,
+                    readOnly: ReadOnlyStatus
                 }
                 }
 
@@ -318,40 +289,9 @@ res.Add()
                         valueExpr: "Text",
                         displayExpr: "Text",
                         value: HolidayAppointment.Text
-                        //                    onValueChanged: function (args) {
-                        //                        showToast("Posted", args.Id, "info");
-                        //                        startDate = args.value;
-                        //                        form.getEditor("EndDate")
-                        //                            .option("value", new Date(startDate.getTime() +
-                        //                                60 * 1000 * movie.Duration));
-                        //                    }
                     }
                 }
-
-            //,
-            //{
-            //    label: {
-            //        text: HolidayAppointment.AppointmentId + ":" + HolidayAppointment.StartPeriod +":"+ HolidayAppointment.EndPeriod
-            //    },
-            //    name: "users.UserName",
-            //    editorType: "dxTextBox",
-            //    editorOptions: {
-            //        value: users.UserName,
-            //        readOnly: true
-            //    }
-            //}
             ]);
-
-//        showToast("Posted", "333", "info");
-        //showToast("Posted", test1, "info");
-
-//        if (ViewData["currentUserID"] != "") {
-//            form.getEditor("userEditor").option("value", ViewBag.currentUser.Id);
-            //            HolidayAppointment.UserID = ViewBag.currentUser.Id);
-            //HolidayAppointment.UserID = "");
-
-        //showToast("Posted", "sfdsdffsdf", "info");
-        //showToast2("zzzzzzzzzzzzzzzzzzzz " + test2);
     }
 
     function showToast(event, value, type) {
@@ -359,7 +299,7 @@ res.Add()
     }
 
     function showToast2(value) {
-//        var fred = currentID;
+
         DevExpress.ui.notify(value, "info", 3600);
     }
 

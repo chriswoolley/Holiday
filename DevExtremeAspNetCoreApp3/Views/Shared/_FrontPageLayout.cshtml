@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<HolidayUser> SignInManager
-@*@inject IAuthorizationService AuthorizationService
-    @inject UserManager<ApplicationUser> UserManager*@
+@*@inject IAuthorizationService AuthorizationService*@
+@inject UserManager<HolidayUser> UserManager
 
 <!DOCTYPE html>
 
@@ -47,22 +47,23 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" id="Home" asp-controller="Home" asp-action="Index">Home</a></li>
-                @if (SignInManager.IsSignedIn(User))
+                @*@if (SignInManager.IsSignedIn(User))*@
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
-                <li>
-                <li class="nav-item"><a class="nav-link" id="Admin" asp-controller="Admin" asp-action="Index">Administration</a></li>
-                <form asp-area="" asp-controller="Admin" asp-action="Logout" id="logoutForm"
-                      method="post" class="nav-item">
-                    <ul class="nav-item">
-                        <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                    </ul>
-                </form>
+                    <li>
+                    <li class="nav-item"><a class="nav-link" id="Admin" asp-controller="Admin" asp-action="Index">Administration</a></li>
+                    <form asp-area="" asp-controller="Admin" asp-action="Logout" id="logoutForm"
+                          method="post" class="nav-item">
+                        <ul class="nav-item">
+                            <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        </ul>
+                    </form>
 
-                </li>
+                    </li>
                 }
                 else
                 {
-                <li class="nav-item"><a class="nav-link" id="loginLink" asp-controller="Admin" asp-action="Login">Log in</a></li>
+                    <li class="nav-item"><a class="nav-link" id="loginLink" asp-controller="Admin" asp-action="Login">Log in</a></li>
                 }
             </ul>
         </div>

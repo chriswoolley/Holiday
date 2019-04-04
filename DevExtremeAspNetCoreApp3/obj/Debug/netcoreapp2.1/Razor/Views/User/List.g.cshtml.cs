@@ -145,12 +145,12 @@ else
             WriteLiteral("</td>\r\n\r\n                <td>\r\n\r\n                    ");
             EndContext();
             BeginContext(682, 432, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "562a0de5f2814adfa968afccc7aa1482", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "78297fde3c584012af1864521470af63", async() => {
                 BeginContext(748, 26, true);
                 WriteLiteral("\r\n                        ");
                 EndContext();
                 BeginContext(774, 88, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bb06845ea14a447f9f4c02c2beb9372d", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "37655778fc4f4126b8de845b3f842789", async() => {
                     BeginContext(854, 4, true);
                     WriteLiteral("Edit");
                     EndContext();
@@ -242,7 +242,7 @@ else
             WriteLiteral("\r\n    <p>\r\n        ");
             EndContext();
             BeginContext(1665, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6db46747be9a4e3dbc4aeae7fdf7774f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "17f81201dff54a9e90bcf8422edae604", async() => {
                 BeginContext(1713, 12, true);
                 WriteLiteral("Add new user");
                 EndContext();
@@ -265,7 +265,7 @@ else
             WriteLiteral("\r\n        ");
             EndContext();
             BeginContext(1739, 71, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7a1516e8c3984e658c5c40fe5ea288a3", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "763f9ec047d2497a8827c439e0a5d0f2", async() => {
                 BeginContext(1794, 12, true);
                 WriteLiteral("Manage Roles");
                 EndContext();

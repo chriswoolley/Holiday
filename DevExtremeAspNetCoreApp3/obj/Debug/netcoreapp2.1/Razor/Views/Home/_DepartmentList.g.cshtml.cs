@@ -96,12 +96,12 @@ using DevExtreme.AspNet.Mvc;
             WriteLiteral("        ");
             EndContext();
             BeginContext(530, 368, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4504980278c54270ac4a37c45141f569", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "025b47fa2c2341a492a43a0708a0ae0f", async() => {
                 BeginContext(604, 14, true);
                 WriteLiteral("\r\n            ");
                 EndContext();
                 BeginContext(618, 115, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d5511d2eea05439e811a23200bd178b2", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "72faa5940b7540e0af8f23db0403e5bd", async() => {
                     BeginContext(704, 25, false);
 #line 20 "C:\HolidayManager\DevExtremeAspNetCoreApp3\Views\Home\_DepartmentList.cshtml"
                                                                                             Write(department.DepartmentName);

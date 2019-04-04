@@ -12,6 +12,7 @@
 }
 
 
+
 <script type="text/javascript">
     var currentUserId = '@runtime.currentUserId';
     @*var isSignedIn = '@(SignInManager.IsSignedIn(User))';
@@ -27,84 +28,86 @@
     <br />
     <br />
 
-    @currentID
-    
-
-@(Html.DevExtreme().Scheduler()
-.ID("scheduler")
-.DataSource(Model)
-.TextExpr("Description")
-.StartDateExpr("StartDate")
-.EndDateExpr("EndDate")
-//.Disabled($isSignedIn)
-//                                                                    .Views(new SchedulerViewType[] { SchedulerViewType.Day, SchedulerViewType.TimelineMonth, SchedulerViewType.WorkWeek, SchedulerViewType.Week, SchedulerViewType.Agenda })
-.Views(new SchedulerViewType[] { SchedulerViewType.Week })
-.CurrentView(SchedulerViewType.Week)
-.CurrentDate(new DateTime(2019, 3, 7))
-.FirstDayOfWeek(FirstDayOfWeek.Sunday)
-
-.OnAppointmentClick("SetProtection")
-.OnAppointmentDblClick("SetProtection")
-
-.Option("editing.allowResizing", false)
-.Option("editing.allowDragging", false)
-.OnAppointmentAdded("InsertData")
-
-.StartDayHour(9)
-.EndDayHour(18)
-.CellDuration(120)
-.MaxAppointmentsPerCell(5)
-.OnAppointmentFormOpening("appointmentForm_created")
 
 
-.Resources(res =>
-{
-    res.Add()
-    .FieldExpr("StartPeriod")
-    .AllowMultiple(false)
-    .Label("Start Period")
-    .DataSource
-    (new object[] {
+
+    @(Html.DevExtreme().Scheduler()
+                        .ID("scheduler")
+                        .DataSource(Model)
+                        .TextExpr("Description")
+                        .StartDateExpr("StartDate")
+                        .EndDateExpr("EndDate")
+                        //.Disabled($isSignedIn)
+                        //                                                                    .Views(new SchedulerViewType[] { SchedulerViewType.Day, SchedulerViewType.TimelineMonth, SchedulerViewType.WorkWeek, SchedulerViewType.Week, SchedulerViewType.Agenda })
+                        .Views(new SchedulerViewType[] { SchedulerViewType.Week })
+                        .CurrentView(SchedulerViewType.Week)
+                        .CurrentDate(new DateTime(2019, 3, 7))
+                        .FirstDayOfWeek(FirstDayOfWeek.Sunday)
+//                        .Editing()
+
+                        .OnAppointmentClick("SetProtection")
+                        .OnAppointmentDblClick("SetProtection")
+
+                        .Option("editing.allowResizing", false)
+                        .Option("editing.allowDragging", false)
+                        .OnAppointmentAdded("InsertData")
+                        .OnAppointmentUpdated("EditedData")
+
+                        .StartDayHour(9)
+                        .EndDayHour(18)
+                        .CellDuration(120)
+                        .MaxAppointmentsPerCell(5)
+                        .OnAppointmentFormOpening("appointmentForm_created")
+
+
+                        .Resources(res =>
+                        {
+                            res.Add()
+                            .FieldExpr("StartPeriod")
+                            .AllowMultiple(false)
+                            .Label("Start Period")
+                            .DataSource
+                            (new object[] {
 
 new { id = 0, text = "Morning" },
 new { id = 1, text = "Afternoon" }});
 
-    res.Add()
-    .FieldExpr("EndPeriod")
-    .AllowMultiple(false)
-    .Label("End Period")
-    .DataSource
-    (new object[] {
+                            res.Add()
+                            .FieldExpr("EndPeriod")
+                            .AllowMultiple(false)
+                            .Label("End Period")
+                            .DataSource
+                            (new object[] {
 new { id = 0, text = "Morning"},
 new { id = 1, text = "Afternoon"}});
 
-    res.Add()
-    .FieldExpr("StatusKey")
-    .AllowMultiple(false)
-    .Label("Status")
-    .DataSource
-    (new object[] {
+                            res.Add()
+                            .FieldExpr("StatusKey")
+                            .AllowMultiple(false)
+                            .Label("Status")
+                            .DataSource
+                            (new object[] {
 new { id = 0, text = "Requested"},
 new { id = 1, text = "Confirmed"},
 new { id = 2, text = "Denied"}
-                                                                                                                                                                                                                                                });
+                                                                                                                                                                                                                                                                        });
 
-    res.Add()
-    .FieldExpr("UserID")
-    .AllowMultiple(false)
-    .ColorExpr("colorHighlight")
-    .Label("remove me")
-    .DataSource(userManager.Users.ToList()).DisplayExpr("UserName").ValueExpr("Id");
+                            res.Add()
+                            .FieldExpr("UserID")
+                            .AllowMultiple(false)
+                            .ColorExpr("colorHighlight")
+                            .Label("remove me")
+                            .DataSource(userManager.Users.ToList()).DisplayExpr("UserName").ValueExpr("Id");
 
-    res.Add()
-    .FieldExpr("UserID")
-    .AllowMultiple(false)
-    .Label("User")
-    .DataSource(userManager.Users.ToList()).DisplayExpr("UserName").ValueExpr("Id");
+                            res.Add()
+                            .FieldExpr("UserID")
+                            .AllowMultiple(false)
+                            .Label("User")
+                            .DataSource(userManager.Users.ToList()).DisplayExpr("UserName").ValueExpr("Id");
 
-}
-).Height(580)
-)
+                        }
+                        ).Height(580)
+    )
 
     currentid @currentID
     signed in and admin @(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
@@ -159,6 +162,9 @@ new { id = 2, text = "Denied"}
             DisplayReadOnly = true;
             option = 1;
 
+            HolidayAppointment.StartPeriod = 0;
+            HolidayAppointment.EndPeriod = 1;
+
             NewAppointmentOrAdminReadState = true;
             if (adminSignedIn == "True") {
                 option = option + 2;
@@ -173,7 +179,7 @@ new { id = 2, text = "Denied"}
 
         }
         else {
-            SelectUserId = HolidayAppointment.UserID;                                           
+            SelectUserId = HolidayAppointment.UserID;
             SelectTypeId = HolidayAppointment.StatusKey;
             option = option + 8;
             if (adminSignedIn == "True") {
@@ -182,26 +188,27 @@ new { id = 2, text = "Denied"}
                 option = option + 16;
             }
             else {
-                DisplayReadOnly = true;
+                DisplayReadOnly = (true) && (SelectTypeId = 0);
                 NewAppointmentOrAdminReadState = false;
                 option = option + 32;
             }
         }
 
 
+        if (isSignedIn == "False") {
+            option = option + 64;
+            DisplayReadOnly = true;
+            NewAppointmentOrAdminReadState = true;
+            //form.OptionsCustomization("AllowAppointmentEdit", [false]);
+        }
+
         //Default state
         ViewOnly = true;
 
-
-        //showToast2("ReadOnlyStatus:" + ReadOnlyStatus);
-//        showToast2("ReadOnlyStatus:" + ReadOnlyStatus);
         showToast2("option:" + option + " currentUserId:" + currentUserId + " isSignedIn:" + isSignedIn + " adminSignedIn:" + adminSignedIn + " DisplayReadOnly:" + DisplayReadOnly + " NewAppointmentOrAdminReadState:" + NewAppointmentOrAdminReadState);
-        //showToast2("SelectUserId:" + SelectUserId + " test2:" + currentUserId + " HolidayAppointment.UserID:" + HolidayAppointment.UserID + " SelectTypeId:" + SelectTypeId);
-
 
 
         form.option(
-
             "items", [
                 {
                     dataField: "UserID",
@@ -256,7 +263,7 @@ new { id = 2, text = "Denied"}
                         }
                         var testDate = data.appointmentData.startDate;
                         form.getEditor("startDateEditor").option("value", testDate);
-                        showToast("Holiday start time set to " + testDate, testDate, "info");
+                        //showToast("Holiday start time set to " + testDate, testDate, "info");
                     }
                 }
             }
@@ -302,7 +309,7 @@ new { id = 2, text = "Denied"}
                             }
                             var testDate = data.appointmentData.endDate;
                             form.getEditor("endDateEditor").option("value", testDate);
-                            showToast("Holiday finsh time set to " + testDate, testDate, "info");
+                            //showToast("Holiday finsh time set to " + testDate, testDate, "info");
                         }
                     }
                 }
@@ -364,8 +371,6 @@ new { id = 2, text = "Denied"}
             EndPeriod: e.appointmentData.EndPeriod
         };
 
-        //alert(JSON.stringify(data));
-        //console.log(JSON.stringify(data));
 
         $.ajax({
             type: "POST",
@@ -382,6 +387,42 @@ new { id = 2, text = "Denied"}
             }
         });
     }
+
+
+    function EditedData(e) {
+
+        var data = { // to be replaced with form values
+            AppointmentId: e.appointmentData.AppointmentId,
+            Text: e.appointmentData.Text,
+            Description: e.appointmentData.Description,
+            StartDate: e.appointmentData.StartDate,
+            EndDate: e.appointmentData.EndDate,
+            AllDay: e.appointmentData.AllDay,
+            RecurrenceRule: e.appointmentData.RecurrenceRule,
+            DepartmentID: e.appointmentData.DepartmentID,
+            StatusKey: e.appointmentData.StatusKey,
+            UserID: e.appointmentData.UserID,
+            HolidaysTaken: e.appointmentData.HolidaysTaken,
+            Duration: e.appointmentData.Duration,
+            StartPeriod: e.appointmentData.StartPeriod,
+            EndPeriod: e.appointmentData.EndPeriod
+        };
+
+        $.ajax({
+            type: "PUT",
+            url: "@Url.Action("Put", "Home")",
+            contentType: "application/json",
+            dataType: "json",
+            data:  JSON.stringify(data),
+            success: function (response) {
+                showToast("Appointment updated", "", "");
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    }
+
 
     function setDataSource(e) {
         //this one fies the event
@@ -409,4 +450,7 @@ new { id = 2, text = "Denied"}
     function getSchedulerInstance() {
         return $("#scheduler").dxScheduler("instance");
     }
+
+
+
 </script>

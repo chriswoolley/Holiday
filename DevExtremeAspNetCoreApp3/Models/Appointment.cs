@@ -65,5 +65,25 @@ namespace HolidayWeb.Models
             return true;
         }
 
+
+        public void copyValueFrom(Appointment appointment)
+        {
+            this.AllDay = appointment.AllDay;
+            this.DepartmentID = appointment.DepartmentID;
+            this.Description = appointment.Description;
+            this.Duration = appointment.Duration;
+            this.EndDate = appointment.EndDate;
+            this.EndPeriod = appointment.EndPeriod;
+            this.HolidaysTaken = appointment.HolidaysTaken;
+            this.RecurrenceRule = appointment.RecurrenceRule;
+            this.StartDate = appointment.StartDate;
+            this.StartPeriod = appointment.StartPeriod;
+            this.StatusKey = appointment.StatusKey;
+            this.Text = appointment.Text;
+            this.UserID = appointment.UserID;
+
+
+
+        }
     }
 }

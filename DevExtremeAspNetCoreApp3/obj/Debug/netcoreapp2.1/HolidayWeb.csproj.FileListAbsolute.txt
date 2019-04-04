@@ -58,4 +58,3 @@ C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.Vi
 C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.dll
 C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.pdb
 C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.csproj.CopyComplete
-C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.csprojAssemblyReference.cache

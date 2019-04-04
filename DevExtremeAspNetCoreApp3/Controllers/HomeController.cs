@@ -163,5 +163,15 @@ namespace HolidayWeb.Controllers
             _appointmentRepository.AddAppointment(newAppointment);
             return new JsonResult(true);
         }
+
+        [HttpPut]
+        public IActionResult Put([FromBody]Appointment newAppointment)
+        {
+            var appointment = _appointmentRepository.GetAppointmentById(newAppointment.AppointmentId);
+            appointment.copyValueFrom(newAppointment);
+            _appointmentRepository.EditAppointment(appointment);
+            return Ok();
+        }
+
     }
 }

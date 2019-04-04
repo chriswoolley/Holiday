@@ -149,12 +149,12 @@ else
             WriteLiteral("</td>\r\n\r\n                <td>\r\n                    ");
             EndContext();
             BeginContext(672, 429, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b1ec909ff2d345aa8e305405678ef1c8", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3fa54d0027214f43a8e52ec9b63d9555", async() => {
                 BeginContext(740, 26, true);
                 WriteLiteral("\r\n                        ");
                 EndContext();
                 BeginContext(766, 88, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8afa7ebbf9384283afc9fc64d1da9e3d", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "82e4b1eff3e8497fabd7df8cecb86587", async() => {
                     BeginContext(846, 4, true);
                     WriteLiteral("Edit");
                     EndContext();
@@ -240,7 +240,7 @@ else
             WriteLiteral("\r\n<p>\r\n    ");
             EndContext();
             BeginContext(1184, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3d77c2e02a594f3d9bbe52151aae352f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6c46083a52824155877652d81ca30f20", async() => {
                 BeginContext(1232, 12, true);
                 WriteLiteral("Add new user");
                 EndContext();

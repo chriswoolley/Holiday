@@ -14,8 +14,8 @@
 
 <script type="text/javascript">
     var currentUserId = '@runtime.currentUserId';
-    var isSignedIn = '@(SignInManager.IsSignedIn(User))';
-    var adminSignedIn = '@(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))';
+    @*var isSignedIn = '@(SignInManager.IsSignedIn(User))';
+    var adminSignedIn = '@(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))';*@
 </script>
 
 <div class="row">
@@ -145,6 +145,12 @@ new { id = 2, text = "Denied"}
         DisplayReadOnly = false;
         NewAppointmentOrAdminReadState = true;
 
+        var isSignedIn = '@(SignInManager.IsSignedIn(User))';
+        var adminSignedIn = '@(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))';
+
+
+
+        var option = 0;
         // set userId depending on insert or edit
         SelectUserId = "";
         if (HolidayAppointment.AppointmentId == undefined) {
@@ -154,9 +160,9 @@ new { id = 2, text = "Denied"}
             option = 1;
 
             NewAppointmentOrAdminReadState = true;
-            if (adminSignedIn) {
+            if (adminSignedIn == "True") {
                 option = option + 2;
-                DisplayReadOnly = true;
+                DisplayReadOnly = false;
                 NewAppointmentOrAdminReadState = false;
             }
             else {
@@ -167,17 +173,17 @@ new { id = 2, text = "Denied"}
 
         }
         else {
-            SelectUserId = HolidayAppointment.UserID;                                                     getting into all parts on the if else
+            SelectUserId = HolidayAppointment.UserID;                                           
             SelectTypeId = HolidayAppointment.StatusKey;
             option = option + 8;
-            if (adminSignedIn) {
+            if (adminSignedIn == "True") {
                 DisplayReadOnly = false;
                 NewAppointmentOrAdminReadState = false;
                 option = option + 16;
             }
             else {
                 DisplayReadOnly = true;
-                NewAppointmentOrAdminReadState = true;
+                NewAppointmentOrAdminReadState = false;
                 option = option + 32;
             }
         }

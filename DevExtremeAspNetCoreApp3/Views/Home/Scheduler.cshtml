@@ -28,7 +28,7 @@
     <br />
 
     @currentID
-
+    
 
 @(Html.DevExtreme().Scheduler()
 .ID("scheduler")
@@ -142,28 +142,54 @@ new { id = 2, text = "Denied"}
             endDate = data.appointmentData.EndDate,
             users = Users;
 
+        DisplayReadOnly = false;
+        NewAppointmentOrAdminReadState = true;
 
         // set userId depending on insert or edit
         SelectUserId = "";
         if (HolidayAppointment.AppointmentId == undefined) {
             SelectUserId = currentUserId;
             SelectTypeId = 0;
+            DisplayReadOnly = true;
+            option = 1;
+
+            NewAppointmentOrAdminReadState = true;
+            if (adminSignedIn) {
+                option = option + 2;
+                DisplayReadOnly = true;
+                NewAppointmentOrAdminReadState = false;
+            }
+            else {
+                option = option + 4;
+                DisplayReadOnly = true;
+                NewAppointmentOrAdminReadState = false;
+            }
+
         }
         else {
-            SelectUserId = HolidayAppointment.UserID;
+            SelectUserId = HolidayAppointment.UserID;                                                     getting into all parts on the if else
             SelectTypeId = HolidayAppointment.StatusKey;
+            option = option + 8;
+            if (adminSignedIn) {
+                DisplayReadOnly = false;
+                NewAppointmentOrAdminReadState = false;
+                option = option + 16;
+            }
+            else {
+                DisplayReadOnly = true;
+                NewAppointmentOrAdminReadState = true;
+                option = option + 32;
+            }
         }
 
 
-
-        ReadOnlyStatus = !adminSignedIn;
-        //ViewOnly = isSignedIn;
-        ViewOnly = false;
+        //Default state
+        ViewOnly = true;
 
 
         //showToast2("ReadOnlyStatus:" + ReadOnlyStatus);
 //        showToast2("ReadOnlyStatus:" + ReadOnlyStatus);
-        showToast2("currentUserId:" + currentUserId + " isSignedIn:" + isSignedIn + " adminSignedIn:" + adminSignedIn);
+        showToast2("option:" + option + " currentUserId:" + currentUserId + " isSignedIn:" + isSignedIn + " adminSignedIn:" + adminSignedIn + " DisplayReadOnly:" + DisplayReadOnly + " NewAppointmentOrAdminReadState:" + NewAppointmentOrAdminReadState);
         //showToast2("SelectUserId:" + SelectUserId + " test2:" + currentUserId + " HolidayAppointment.UserID:" + HolidayAppointment.UserID + " SelectTypeId:" + SelectTypeId);
 
 
@@ -180,7 +206,7 @@ new { id = 2, text = "Denied"}
                         displayExpr: "UserName",
                         valueExpr: "Id",
                         value: SelectUserId,
-//                        readOnly: ReadOnlyStatus
+                        readOnly: DisplayReadOnly
                 }
             }
             ,
@@ -192,6 +218,7 @@ new { id = 2, text = "Denied"}
                     value: startDate,
                     width: "100%",
                     type: "date",
+                    readOnly: NewAppointmentOrAdminReadState,
                     editorOptions: { format:"date"},
                     onValueChanged: function (args) {
                         startDate = args.value;
@@ -206,6 +233,7 @@ new { id = 2, text = "Denied"}
                     dataSource: [{ "ID": 0, "periodName": "Morning" }, { "ID": 1, "periodName": "Afternoon" }],
                     valueExpr: "ID",
                     displayExpr: "periodName",
+                    readOnly: NewAppointmentOrAdminReadState,
                     value: HolidayAppointment.StartPeriod,
                     onValueChanged: function (args) {
                         var startDate = data.appointmentData.StartDate;
@@ -236,6 +264,7 @@ new { id = 2, text = "Denied"}
                     value: endDate,
                     width: "100%",
                     type: "datetime",
+                    readOnly: NewAppointmentOrAdminReadState,
                     onValueChanged: function (args) {
                     }
                 }
@@ -250,6 +279,7 @@ new { id = 2, text = "Denied"}
                         dataSource: [{ "ID": 0, "periodName": "Morning" }, { "ID": 1, "periodName": "Afternoon" }],
                         valueExpr: "ID",
                         displayExpr: "periodName",
+                        readOnly: NewAppointmentOrAdminReadState,
                         value: HolidayAppointment.EndPeriod,
                         onValueChanged: function (args) {
                             var endDate = data.appointmentData.EndDate;
@@ -280,7 +310,7 @@ new { id = 2, text = "Denied"}
                     valueExpr: "ID",
                     displayExpr: "Status",
                     value: SelectTypeId,
-  //                  readOnly: ReadOnlyStatus
+                    readOnly: DisplayReadOnly
                 }
                 }
 
@@ -291,6 +321,7 @@ new { id = 2, text = "Denied"}
                     //height: "80px",
                     editorOptions: {
                         valueExpr: "Text",
+                        readOnly: NewAppointmentOrAdminReadState,
                         displayExpr: "Text",
                         value: HolidayAppointment.Text
                     }

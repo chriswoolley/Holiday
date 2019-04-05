@@ -59,6 +59,17 @@ namespace HolidayWeb.Models
 
                 context.SaveChanges();
 
+                context.Roles.AddRange(
+                     new IdentityRole
+                     {
+                         Id = "22914448-2e14-4ec5-90ad-dc760b9cfa8d",
+                         Name = "Manager",
+                         NormalizedName = "MANAGER"
+                     });
+
+                context.SaveChanges();
+
+
 
                 HolidayUser user = new HolidayUser
                 {
@@ -98,7 +109,7 @@ namespace HolidayWeb.Models
                 context.SaveChanges();
 
                 IdentityUserRole<string> ur1 = new IdentityUserRole<string>();
-                ur1.RoleId = "b4b4e963-6e7e-4f41-8229-4390b1257hg6";
+                ur1.RoleId = "22914448-2e14-4ec5-90ad-dc760b9cfa8d";
                 ur1.UserId = user1.Id;
 
 

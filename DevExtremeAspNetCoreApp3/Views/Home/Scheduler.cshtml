@@ -144,27 +144,23 @@ new { id = 2, text = "Denied"}
             startDate = data.appointmentData.StartDate,
             endDate = data.appointmentData.EndDate,
             users = Users;
-
+        // defulat state
         DisplayReadOnly = false;
         NewAppointmentOrAdminReadState = true;
 
         var isSignedIn = '@(SignInManager.IsSignedIn(User))';
         var adminSignedIn = '@(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))';
 
-
-
         var option = 0;
-        // set userId depending on insert or edit
         SelectUserId = "";
         if (HolidayAppointment.AppointmentId == undefined) {
             SelectUserId = currentUserId;
             SelectTypeId = 0;
             DisplayReadOnly = true;
             option = 1;
-
-            HolidayAppointment.StartPeriod = 0;
-            HolidayAppointment.EndPeriod = 1;
-
+            //if we do this we need to sort the times out, like in homecontrol
+            //HolidayAppointment.StartPeriod = 0;
+            //HolidayAppointment.EndPeriod = 1;
             NewAppointmentOrAdminReadState = true;
             if (adminSignedIn == "True") {
                 option = option + 2;
@@ -203,11 +199,9 @@ new { id = 2, text = "Denied"}
         }
 
         //Default state
-        ViewOnly = true;
+        //ViewOnly = true;
 
         showToast2("option:" + option + " currentUserId:" + currentUserId + " isSignedIn:" + isSignedIn + " adminSignedIn:" + adminSignedIn + " DisplayReadOnly:" + DisplayReadOnly + " NewAppointmentOrAdminReadState:" + NewAppointmentOrAdminReadState);
-
-
         form.option(
             "items", [
                 {

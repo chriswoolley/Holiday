@@ -1,5 +1,6 @@
 @using Microsoft.AspNetCore.Identity.EntityFrameworkCore
 @model MainViewModel
+@inject SignInManager<HolidayUser> SignInManager
 
 
 @{
@@ -10,20 +11,23 @@
 }
 <p class=".bottom-two">
     <div class="row">
-        <div class="column left dx-datagrid-filter-panel" style="width:auto">
-            @await Html.PartialAsync("~/Views/Home/_DepartmentList.cshtml", Model.DepartmentList)
-        </div>
-        <div class="column middle">
+        @if (SignInManager.IsSignedIn(User))
+        {
             <div class="column left dx-datagrid-filter-panel" style="width:auto">
-                @await Html.PartialAsync("~/Views/Home/Scheduler.cshtml", Model.AppointmentList, ViewData);
+                @await Html.PartialAsync("~/Views/Home/_DepartmentList.cshtml", Model.DepartmentList)
             </div>
-        </div>
-        <div class="column right">
-            @await Html.PartialAsync("~/Views/User/_UserStatView.cshtml", Model.DepartmentUserList)
-        </div>
-    </div>
+            <div class="column middle">
+                <div class="column left dx-datagrid-filter-panel" style="width:auto">
+                    @await Html.PartialAsync("~/Views/Home/Scheduler.cshtml", Model.AppointmentList, ViewData);
+                </div>
+            </div>
+            <div class="column right">
+                @await Html.PartialAsync("~/Views/User/_UserStatView.cshtml", Model.DepartmentUserList)
+            </div>
+        }
 
-    <h2>@ViewData["currentUserID"] test</h2>
+    </div>
+    @*<h2>@ViewData["currentUserID"] test</h2>*@
 </p>
 
 

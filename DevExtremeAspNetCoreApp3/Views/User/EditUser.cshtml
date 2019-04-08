@@ -1,6 +1,9 @@
 ﻿@model EditUserViewModel
 @inject IDepartment test
+
+
 <h2>Edit user</h2>
+
 <form asp-controller="User" asp-action="EditUser" method="post" class="form-horizontal" role="form">
     <h4>You can change the user details below</h4>
     <hr />
@@ -14,17 +17,13 @@
         </div>*@
     <div class="form-group">
         <label asp-for="UserName" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="UserName" class="form-control" />
-            <span asp-validation-for="UserName" class="text-danger"></span>
-        </div>
+          <input asp-for="UserName" class="form-control" />
+          <span asp-validation-for="UserName" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Email" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
+         <input asp-for="Email" class="form-control" />
+         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="colorHighlight" class="control-label"></label>
@@ -50,13 +49,11 @@
         @*                <input class="btn btn-primary" value="Add claim for user" type="submit" />*@
     </div>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-primary" value="Save user" />
-            <a asp-action="List" class="btn btn-primary">Cancel</a>
-        </div>
+         <input type="submit" class="btn btn-primary" value="Save user" />
+          <a asp-action="List" class="btn btn-primary">Cancel</a>
     </div>
 </form>
-<h3>Claims for this user</h3>
+@*<h3>Claims for this user</h3>
 <ul>
     @foreach (var claim in Model.UserClaims)
     {
@@ -68,7 +65,7 @@
 
 <a asp-action="ManageClaimsForUser" asp-route-userId="@Model.Id" class="btn btn-primary">Add claims for this user</a>
 <a asp-action="EditRole" asp-route-userId="@Model.Id" class="btn btn-primary">EditRole</a>
-<a asp-action="ManageClaimsForUser" asp-route-userId="@Model.Id" class="btn btn-primary">ManageClaimsForUser</a>
+<a asp-action="ManageClaimsForUser" asp-route-userId="@Model.Id" class="btn btn-primary">ManageClaimsForUser</a>*@
 
 
 

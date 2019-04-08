@@ -22,54 +22,35 @@ namespace HolidayWeb.Models
                     new Department { DepartmentName = "QA" },
                     new Department { DepartmentName = "Marketing" },
                     new Department { DepartmentName = "R&D" },
-
                     new State { Name = "Requested" },
                     new State { Name = "Granted" },
                     new State { Name = "Denied" },
                     new State { Name = "Delayed" },
-
                     new EventType { Name = "Holiday" },
                     new EventType { Name = "Sick" },
                     new EventType { Name = "On-Site" },
                     new EventType { Name = "Traveling" },
                     new EventType { Name = "AWP" },
-
                     new SystemSetting { YearStartDate = DateTime.Parse("01/02/2019") }
                 );
 
-
-                context.Roles.AddRange(
-                     new IdentityRole
-                     {
-                         Id = "b562e963-6e7e-4f41-8229-4390b1257hg6",
-                         Name = "Admin",
-                         NormalizedName = "ADMIN"
-                     });
-
+                IdentityRole adminIdentityRole = new IdentityRole();
+                adminIdentityRole.Name = "admin";
+                adminIdentityRole.NormalizedName = "ADMIN";
+                context.Roles.Add(adminIdentityRole);
                 context.SaveChanges();
 
-
-                context.Roles.AddRange(
-                     new IdentityRole
-                     {
-                         Id = "b4b4e963-6e7e-4f41-8229-4390b1257hg6",
-                         Name = "User",
-                         NormalizedName = "USER"
-                     });
-
+                IdentityRole userIdentityRole = new IdentityRole();
+                userIdentityRole.Name = "user";
+                adminIdentityRole.NormalizedName = "USER";
+                context.Roles.Add(userIdentityRole);
                 context.SaveChanges();
 
-                context.Roles.AddRange(
-                     new IdentityRole
-                     {
-                         Id = "22914448-2e14-4ec5-90ad-dc760b9cfa8d",
-                         Name = "Manager",
-                         NormalizedName = "MANAGER"
-                     });
-
+                IdentityRole managerIdentityRole = new IdentityRole();
+                managerIdentityRole.Name = "manager";
+                adminIdentityRole.NormalizedName = "MANAGER";
+                context.Roles.Add(managerIdentityRole);
                 context.SaveChanges();
-
-
 
                 HolidayUser user = new HolidayUser
                 {
@@ -82,15 +63,14 @@ namespace HolidayWeb.Models
                     LockoutEnabled = true,
                     SecurityStamp = "96a58895-0ca2-4145-b6bb-b4b5411361a2"
                 };
-
                 context.Users.Add(user);
                 context.SaveChanges();
 
-
-                IdentityUserRole<string> ur = new IdentityUserRole<string>();
-                ur.RoleId = "b562e963-6e7e-4f41-8229-4390b1257hg6";
-                ur.UserId = user.Id;
-
+                IdentityUserRole<string> adminIdentityUserRole = new IdentityUserRole<string>();
+                adminIdentityUserRole.RoleId = adminIdentityRole.Id;
+                adminIdentityUserRole.UserId = user.Id;
+                context.UserRoles.Add(adminIdentityUserRole);
+                context.SaveChanges();
 
                 HolidayUser user1 = new HolidayUser
                 {
@@ -104,16 +84,13 @@ namespace HolidayWeb.Models
                     SecurityStamp = "DYGZ56SBLC36EWFN5MGSV32O4KXKYUZC",
                     colorHighlight = "#41e4f0"
                 };
-
                 context.Users.Add(user1);
                 context.SaveChanges();
 
-                IdentityUserRole<string> ur1 = new IdentityUserRole<string>();
-                ur1.RoleId = "22914448-2e14-4ec5-90ad-dc760b9cfa8d";
-                ur1.UserId = user1.Id;
-
-
-                context.UserRoles.Add(ur1);
+                IdentityUserRole<string> chrisIdentityUserRole = new IdentityUserRole<string>();
+                chrisIdentityUserRole.RoleId = managerIdentityRole.Id;
+                chrisIdentityUserRole.UserId = user1.Id;
+                context.UserRoles.Add(chrisIdentityUserRole);
                 context.SaveChanges();
 
                 //*******************************************************************
@@ -131,10 +108,11 @@ namespace HolidayWeb.Models
                 };
                 context.Users.Add(Dev1);
                 context.SaveChanges();
-                IdentityUserRole<string> Dev1ur = new IdentityUserRole<string>();
-                Dev1ur.RoleId = "b4b4e963-6e7e-4f41-8229-4390b1257hg6";
-                Dev1ur.UserId = Dev1.Id;
-                context.UserRoles.Add(Dev1ur);
+
+                IdentityUserRole<string> devIdentityUserRole = new IdentityUserRole<string>();
+                devIdentityUserRole.RoleId = userIdentityRole.Id;
+                devIdentityUserRole.UserId = Dev1.Id;
+                context.UserRoles.Add(devIdentityUserRole);
                 context.SaveChanges();
 
                 //*******************************************************************
@@ -153,10 +131,11 @@ namespace HolidayWeb.Models
                 };
                 context.Users.Add(dev2);
                 context.SaveChanges();
-                IdentityUserRole<string> dev2ur = new IdentityUserRole<string>();
-                dev2ur.RoleId = "b4b4e963-6e7e-4f41-8229-4390b1257hg6";
-                dev2ur.UserId = dev2.Id;
-                context.UserRoles.Add(dev2ur);
+
+                IdentityUserRole<string> dev2IdentityUserRole = new IdentityUserRole<string>();
+                dev2IdentityUserRole.RoleId = userIdentityRole.Id;
+                dev2IdentityUserRole.UserId = dev2.Id;
+                context.UserRoles.Add(dev2IdentityUserRole);
                 context.SaveChanges();
 
                 //*******************************************************************
@@ -173,19 +152,14 @@ namespace HolidayWeb.Models
                     SecurityStamp = "WUFR734JM74IGFHDAS5QVDKPDGWKW35D",
                     colorHighlight = "#f0be41"
                 };
-
                 context.Users.Add(sale1);
                 context.SaveChanges();
 
-                IdentityUserRole<string> sale1ur = new IdentityUserRole<string>();
-                sale1ur.RoleId = "b4b4e963-6e7e-4f41-8229-4390b1257hg6";
-                sale1ur.UserId = sale1.Id;
-
-
-                context.UserRoles.Add(sale1ur);
+                IdentityUserRole<string> saleIdentityUserRole = new IdentityUserRole<string>();
+                saleIdentityUserRole.RoleId = userIdentityRole.Id;
+                saleIdentityUserRole.UserId = sale1.Id;
+                context.UserRoles.Add(saleIdentityUserRole);
                 context.SaveChanges();
-
-
 
                 //*******************************************************************
 
@@ -201,17 +175,15 @@ namespace HolidayWeb.Models
                     SecurityStamp = "ZYJMO4EU7N7B7FUO2VEI5JFAVIJXDDQ4",
                     colorHighlight = "#414cf0"
                 };
-
                 context.Users.Add(sale2);
                 context.SaveChanges();
 
-                IdentityUserRole<string> sale2ur = new IdentityUserRole<string>();
-                sale2ur.RoleId = "b4b4e963-6e7e-4f41-8229-4390b1257hg6";
-                sale2ur.UserId = sale2.Id;
-
-
-                context.UserRoles.Add(sale2ur);
+                IdentityUserRole<string> sale2IdentityUserRole = new IdentityUserRole<string>();
+                sale2IdentityUserRole.RoleId = userIdentityRole.Id;
+                sale2IdentityUserRole.UserId = sale2.Id;
+                context.UserRoles.Add(sale2IdentityUserRole);
                 context.SaveChanges();
+
 
                 context.AddRange
                 (

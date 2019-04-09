@@ -81,9 +81,31 @@ namespace HolidayWeb.Models
             this.StatusKey = appointment.StatusKey;
             this.Text = appointment.Text;
             this.UserID = appointment.UserID;
+        }
 
+        public void CorrectValuesFromPeriodSetting()
+        {
+            if (StartPeriod == Period.Morning)
+            {
+                StartDate = new DateTime(StartDate.Year, StartDate.Month, StartDate.Day, 9, 0, 0);
+            }
+            else
+            {
+                StartDate = new DateTime(StartDate.Year, StartDate.Month, StartDate.Day, 13, 0, 0);
+            }
 
+            if (EndPeriod == Period.Morning)
+            {
+                EndDate = new DateTime(EndDate.Year, EndDate.Month, EndDate.Day, 13, 0, 0);
+            }
+            else
+            {
+                EndDate = new DateTime(EndDate.Year, EndDate.Month, EndDate.Day, 17, 0, 0);
+            }
 
         }
+
+
+
     }
 }

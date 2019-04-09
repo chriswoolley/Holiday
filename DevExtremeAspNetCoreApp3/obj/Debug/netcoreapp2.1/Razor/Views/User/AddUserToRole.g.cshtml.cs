@@ -86,7 +86,7 @@ using DevExtreme.AspNet.Mvc;
             WriteLiteral("\r\n<h2>Add user to role</h2>\r\n\r\n");
             EndContext();
             BeginContext(57, 369, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "29b6298da739401f9c9463f0e790a9cc", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "684c94584fd94f96aa38255e7e6f3d39", async() => {
                 BeginContext(112, 40, true);
                 WriteLiteral("\r\n    <input type=\"hidden\" name=\"roleId\"");
                 EndContext();
@@ -101,12 +101,12 @@ WriteAttributeValue("", 160, Model.RoleId, 160, 13, false);
                 WriteLiteral(" />\r\n    ");
                 EndContext();
                 BeginContext(183, 161, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("select", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "17e1793b85d74b2a9b023ab57f817ba0", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("select", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5208adc03646457d856ee8c3af069e65", async() => {
                     BeginContext(282, 10, true);
                     WriteLiteral("\r\n        ");
                     EndContext();
                     BeginContext(292, 37, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cc63e4be515146908cdf299950b6327c", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e282cac8fe7b4305a85c888bb3a9d59c", async() => {
                         BeginContext(300, 20, true);
                         WriteLiteral("Please select a user");
                         EndContext();
@@ -174,7 +174,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_SelectTagHelper.Items = (new SelectList(Mo
             WriteLiteral("\r\n\r\n");
             EndContext();
             BeginContext(430, 63, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "44ec3c9b165145ee89781060b83b69a9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7ef0839db0d74098b9a12c6390b1720c", async() => {
                 BeginContext(485, 4, true);
                 WriteLiteral("Done");
                 EndContext();

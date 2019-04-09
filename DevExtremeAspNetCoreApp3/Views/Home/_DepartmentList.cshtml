@@ -5,7 +5,7 @@
     <div class="dx-tabpanel" style="font-family:Arial; font-weight:bolder">
         @foreach (Department department in Model)
         {
-        <form asp-action="Home" method="put" style="color:darkgray ; width:auto">
+        <form asp-action="Home" method="put" ; width:auto">
             <a class="btn llbtn-info" asp-action="Index" asp-route-DepartmentId="@department.Id">@department.DepartmentName</a>
         </form>
         <br/>

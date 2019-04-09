@@ -18,9 +18,9 @@
     clear: both;
 }
 .llbutton {
-    background-color:#212529;
+    background-color: #004990;
     border: none;
-    color: black;
+    color: #004990;
     padding: 10px 124px 10px 10px;
     text-align: center;
     text-decoration: none;
@@ -33,9 +33,9 @@
 .llbtn-info {
     padding: 1em 0.5em 1em 0.5em;
     font-size: 12px;
-    color: darkgray;
-    background-color: #212529;
-    border-color: darkgray;
+    color: #ffffff;
+    background-color: #004990;
+    border-color: #737e86;
     /*background-color: #17a2b8;*/
     /*border-color: #17a2b8;*/
     display: inline-block;
@@ -60,4 +60,22 @@ body {
     background-size: cover;
     /* Needed to position the navbar */
     position: relative;
+}
+
+
+.llbg-dark {
+    background-color: #004990 !important;
+}
+
+
+.llnavbar-dark .navbar-brand {
+    color: #fff;
+}
+
+
+
+meter::-webkit-meter-optimum-value {
+    box-shadow: 0 5px 5px -5px #999 inset;
+    background-image: linear-gradient( 90deg, #004990 5%, #737e86 100% );
+    background-size: 100% 100%;
 }

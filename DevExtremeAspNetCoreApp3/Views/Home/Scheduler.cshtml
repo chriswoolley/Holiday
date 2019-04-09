@@ -37,11 +37,11 @@
                         .EndDateExpr("EndDate")
                         //.Disabled($isSignedIn)
                         //                                                                    .Views(new SchedulerViewType[] { SchedulerViewType.Day, SchedulerViewType.TimelineMonth, SchedulerViewType.WorkWeek, SchedulerViewType.Week, SchedulerViewType.Agenda })
-                        .Views(new SchedulerViewType[] { SchedulerViewType.Week })
+                        .Views(new SchedulerViewType[] {SchedulerViewType.Week, SchedulerViewType.Month})
                         .CurrentView(SchedulerViewType.Week)
                         .CurrentDate(new DateTime(2019, 3, 7))
                         .FirstDayOfWeek(FirstDayOfWeek.Sunday)
-//                        .Editing()
+                        //                        .Editing()
 
                         .OnAppointmentClick("SetProtection")
                         .OnAppointmentDblClick("SetProtection")
@@ -54,7 +54,7 @@
                         .StartDayHour(9)
                         .EndDayHour(18)
                         .CellDuration(120)
-                        .MaxAppointmentsPerCell(5)
+                        //.MaxAppointmentsPerCell(5)
                         .OnAppointmentFormOpening("appointmentForm_created")
 
 

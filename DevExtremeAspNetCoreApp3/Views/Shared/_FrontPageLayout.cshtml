@@ -39,7 +39,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-md">
+    <nav class="navbar navbar-dark llbg-dark fixed-top navbar-expand-md">
         <a class="navbar-brand" href="/">Holiday Calendar</a>
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="navbar-toggler-icon"></span>
@@ -57,14 +57,18 @@
                             <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                         </ul>
                     </form>
-
                     </li>
                 }
                 else
                 {
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        <form asp-area="" asp-controller="Admin" asp-action="Logout" id="logoutForm"
+                              method="post" class="nav-item">
+                            <ul class="nav-item">
+                                <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                            </ul>
+                        </form>
                     }
                     else
                     {

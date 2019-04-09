@@ -34,13 +34,15 @@ namespace HolidayWeb.Controllers
         private readonly IRuntime _runtime;
         private readonly IAppointment _appointmentRepository;
         private readonly MainViewModel _MainViewModel;
+        private readonly SignInManager<HolidayUser> _signInManager;
 
         public Task<HolidayUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
-        public HomeController(IDepartment department, UserManager<HolidayUser> userManager, IHolidayEntitlement _HolidayEntitlement, IState state,
+        public HomeController(SignInManager<HolidayUser> signInManager, IDepartment department, UserManager<HolidayUser> userManager, 
+            IHolidayEntitlement _HolidayEntitlement, IState state,
             IRuntime _Runtime, IAppointment AppointmentRepository, IHolidayCalc holidayCalc)
         {
-            //            _events = events;
+            _signInManager = signInManager;
             _userManager = userManager;
             _holidayEntitlement = _HolidayEntitlement;
             _DepartmentList = department;
@@ -106,11 +108,7 @@ namespace HolidayWeb.Controllers
                     _MainViewModel.DepartmentUserList = _userManager.Users.Where(p => p.Department.Id == _runtime.currentDepartmentId);
                 }
             }
-
             return View("Index", _MainViewModel);
-
-
-
             //user not selecting in selection box
         }
 
@@ -118,30 +116,7 @@ namespace HolidayWeb.Controllers
         [HttpPost]
         public JsonResult Post([FromBody]Appointment newAppointment)
         {
-            //var newAppointment = new Appointment();
-            //JsonConvert.PopulateObject(AppointmentData, newAppointment);
-
-            //if (!TryValidateModel(newAppointment))
-            //    return BadRequest();
-
-            if (newAppointment.StartPeriod == Period.Morning)
-            {
-                newAppointment.StartDate = new DateTime(newAppointment.StartDate.Year, newAppointment.StartDate.Month, newAppointment.StartDate.Day, 9, 0, 0);
-            }
-            else
-            {
-                newAppointment.StartDate = new DateTime(newAppointment.StartDate.Year, newAppointment.StartDate.Month, newAppointment.StartDate.Day, 13, 0, 0);
-            }
-
-            if (newAppointment.EndPeriod == Period.Morning)
-            {
-                newAppointment.EndDate = new DateTime(newAppointment.EndDate.Year, newAppointment.EndDate.Month, newAppointment.EndDate.Day, 13, 0, 0);
-            }
-            else
-            {
-                newAppointment.EndDate = new DateTime(newAppointment.EndDate.Year, newAppointment.EndDate.Month, newAppointment.EndDate.Day, 17, 0, 0);
-            }
-
+            newAppointment.CorrectValuesFromPeriodSetting();
             var holidayUser = _userManager.Users.Where(p => p.Id == newAppointment.UserID).FirstOrDefault();
             if (holidayUser != null)
             {
@@ -159,7 +134,6 @@ namespace HolidayWeb.Controllers
                 }
             }
             newAppointment.DepartmentID = _runtime.currentDepartmentId;
-
             _appointmentRepository.AddAppointment(newAppointment);
             return new JsonResult(true);
         }
@@ -167,10 +141,37 @@ namespace HolidayWeb.Controllers
         [HttpPut]
         public IActionResult Put([FromBody]Appointment newAppointment)
         {
+            newAppointment.CorrectValuesFromPeriodSetting();
+
+            var holidayUser = _userManager.Users.Where(p => p.Id == newAppointment.UserID).FirstOrDefault();
+            if (holidayUser != null)
+            {
+                newAppointment.Description = holidayUser.UserName;
+                if (newAppointment.StartDate.Date == newAppointment.EndDate.Date)
+                {
+                    if ((newAppointment.StartPeriod == Period.Morning) && (newAppointment.EndPeriod == Period.Afternoon))
+                    {
+                        newAppointment.Description = newAppointment.Description + " All day";
+                    }
+                    else
+                    {
+                        newAppointment.Description = newAppointment.Description + " " + newAppointment.StartPeriod.ToString();
+                    }
+                }
+            }
+
             var appointment = _appointmentRepository.GetAppointmentById(newAppointment.AppointmentId);
             appointment.copyValueFrom(newAppointment);
             _appointmentRepository.EditAppointment(appointment);
             return Ok();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
 
     }

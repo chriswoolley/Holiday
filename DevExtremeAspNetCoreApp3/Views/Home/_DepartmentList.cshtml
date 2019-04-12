@@ -3,13 +3,14 @@
 <div style="margin-left:10px; margin-top:30px">
     <h6> Departments</h6>
     <div class="dx-tabpanel" style="font-family:Arial; font-weight:bolder">
+        <br />
         @foreach (Department department in Model)
-        {
-        <form asp-action="Home" method="put" ; width:auto">
-            <a class="btn llbtn-info" asp-action="Index" asp-route-DepartmentId="@department.Id">@department.DepartmentName</a>
-        </form>
-        <br/>
-        }
+            {
+            <form asp-action="Home" method="put" ; width:auto">
+                <a class="btn llbtn-info" asp-action="Index" asp-route-DepartmentId="@department.Id">@department.DepartmentName </a>
+            </form>
+            <br/>
+            }
     </div>
 </div>
 

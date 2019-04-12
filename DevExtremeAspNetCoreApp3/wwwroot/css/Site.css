@@ -39,12 +39,9 @@
     /*background-color: #17a2b8;*/
     /*border-color: #17a2b8;*/
     display: inline-block;
-    width: 95%;
+    width: 100%;
 }
 
-.button80per {
-    width: 60%;
-}
 
 body {
   padding-top: 1rem;
@@ -79,3 +76,20 @@ meter::-webkit-meter-optimum-value {
     background-image: linear-gradient( 90deg, #004990 5%, #737e86 100% );
     background-size: 100% 100%;
 }
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #004990;
+    border-color: #0062cc
+}
+
+btn-primary:hover {
+    color: #fff;
+    background-color: #62aecb;
+    border-color: #0062cc
+}
+
+
+
+

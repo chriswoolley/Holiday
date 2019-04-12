@@ -5,6 +5,7 @@ C:\HolidayManager\DevExtremeAspNetCoreApp3\bin\Debug\netcoreapp2.1\HolidayWeb.dl
 C:\HolidayManager\DevExtremeAspNetCoreApp3\bin\Debug\netcoreapp2.1\HolidayWeb.pdb
 C:\HolidayManager\DevExtremeAspNetCoreApp3\bin\Debug\netcoreapp2.1\HolidayWeb.Views.dll
 C:\HolidayManager\DevExtremeAspNetCoreApp3\bin\Debug\netcoreapp2.1\HolidayWeb.Views.pdb
+C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.csprojAssemblyReference.cache
 C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.csproj.CoreCompileInputs.cache
 C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.RazorAssemblyInfo.cache
 C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.RazorAssemblyInfo.cs
@@ -58,4 +59,3 @@ C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.Vi
 C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.dll
 C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.pdb
 C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.csproj.CopyComplete
-C:\HolidayManager\DevExtremeAspNetCoreApp3\obj\Debug\netcoreapp2.1\HolidayWeb.csprojAssemblyReference.cache

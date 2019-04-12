@@ -107,8 +107,8 @@ new { id = 2, text = "Denied"}
                         ).Height(580)
     )
 
-    currentid @currentID
-    signed in and admin @(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    @*currentid @currentID
+    signed in and admin @(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))*@
 </div>
 
 <script>

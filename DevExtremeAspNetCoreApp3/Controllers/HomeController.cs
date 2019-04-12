@@ -56,7 +56,7 @@ namespace HolidayWeb.Controllers
             _MainViewModel.StateList = _StateList.GetAllState();
             _MainViewModel.DepartmentUserList = _userManager.Users.ToList();
             _MainViewModel.UserList = _userManager.Users.ToList();
-            _MainViewModel.AppointmentList = _appointmentRepository.GetAllAppointment();
+            _MainViewModel.AppointmentList = _appointmentRepository.GetAppointmentByDepartmentId(_runtime.currentDepartmentId);
             holidayCalc.HolidayRemaining(_MainViewModel.DepartmentUserList, System.DateTime.Now);
         }
 
@@ -108,6 +108,7 @@ namespace HolidayWeb.Controllers
                     _MainViewModel.DepartmentUserList = _userManager.Users.Where(p => p.Department.Id == _runtime.currentDepartmentId);
                 }
             }
+            _MainViewModel.AppointmentList = _appointmentRepository.GetAppointmentByDepartmentId(_runtime.currentDepartmentId);
             return View("Index", _MainViewModel);
             //user not selecting in selection box
         }

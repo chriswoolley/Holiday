@@ -76,6 +76,12 @@ namespace HolidayWeb.Models.Repositories
         }
 
 
+        public IEnumerable<Appointment> GetAppointmentByDepartmentId(int departmentId)
+        {
+            IEnumerable<Appointment> debugAppointments = _AppDbContext.Appointment.Where(p => p.DepartmentID == departmentId);
+            return debugAppointments;
+        }
+
 
     }
 }

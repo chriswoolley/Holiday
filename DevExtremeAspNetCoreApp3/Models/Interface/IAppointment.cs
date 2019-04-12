@@ -13,7 +13,9 @@ namespace HolidayWeb.Models.Interface
         IEnumerable<Appointment> GetAllAppointment();
         ICollection<Appointment> GetAppointmentCollection();
         Appointment GetAppointmentById(int AppointmentId);
+        IEnumerable<Appointment> GetAppointmentByDepartmentId(int departmentId);
         IEnumerable<Appointment> GetAllAppointmentPerUserYear(string UserId, DateTime startDate, DateTime endTime);
+
 
     }
 }

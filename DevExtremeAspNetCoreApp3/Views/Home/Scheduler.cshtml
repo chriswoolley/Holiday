@@ -107,8 +107,8 @@ new { id = 2, text = "Denied"}
                         ).Height(580)
     )
 
-    @*currentid @currentID
-    signed in and admin @(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))*@
+    @*currentid @currentID*@
+    signed in and admin @(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 </div>
 
 <script>
@@ -147,7 +147,7 @@ new { id = 2, text = "Denied"}
         NewAppointmentOrAdminReadState = true;
 
         var isSignedIn = '@(SignInManager.IsSignedIn(User))';
-        var adminSignedIn = '@(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))';
+        var adminSignedIn = '@(SignInManager.IsSignedIn(User) && User.IsInRole("admin"))';
 
         var option = 0;
         SelectUserId = "";
@@ -182,8 +182,8 @@ new { id = 2, text = "Denied"}
                 option = option + 16;
             }
             else {
-                DisplayReadOnly = (true) && (SelectTypeId = 0);
-                NewAppointmentOrAdminReadState = false;
+                DisplayReadOnly = true; //((SelectUserId = currentUserId) && (SelectTypeId = 0));
+                NewAppointmentOrAdminReadState = ((SelectUserId = currentUserId) && (SelectTypeId = 0));
                 option = option + 32;
             }
         }
@@ -199,7 +199,8 @@ new { id = 2, text = "Denied"}
         //Default state
         //ViewOnly = true;
 
-        showToast2("option:" + option + " currentUserId:" + currentUserId + " isSignedIn:" + isSignedIn + " adminSignedIn:" + adminSignedIn + " DisplayReadOnly:" + DisplayReadOnly + " NewAppointmentOrAdminReadState:" + NewAppointmentOrAdminReadState);
+        showToast2("SelectUserId:" + SelectUserId + " SelectTypeId:" + SelectTypeId +  " option:" + option + " currentUserId:" + currentUserId + " isSignedIn:" + isSignedIn + " adminSignedIn:" + adminSignedIn + " DisplayReadOnly:" + DisplayReadOnly + " NewAppointmentOrAdminReadState:" + NewAppointmentOrAdminReadState);
+
         form.option(
             "items", [
                 {
@@ -274,7 +275,6 @@ new { id = 2, text = "Denied"}
                     }
                 }
             }
-
                 ,
                 {
                     dataField: "EndPeriod",

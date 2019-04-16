@@ -87,7 +87,7 @@ using DevExtreme.AspNet.Mvc;
             WriteLiteral("<h1>Administration</h1>\r\n\r\n<div class=\"col-xl-auto\">\r\n    <ul class=\"nav navbar-nav\">\r\n        <li>");
             EndContext();
             BeginContext(99, 73, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "74335d58af6c41138a5ae97f5d940c86", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "95964016597b4f9e9d9abd94a4181a2a", async() => {
                 BeginContext(163, 5, true);
                 WriteLiteral("Users");
                 EndContext();
@@ -112,7 +112,7 @@ using DevExtreme.AspNet.Mvc;
             WriteLiteral("</li>\r\n    </ul>\r\n    <ul class=\"nav navbar-nav\">\r\n        <li>");
             EndContext();
             BeginContext(235, 77, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "66a35931dbd24899b68b95f130044e23", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "945542f49bfe449e9515d572ed219cf7", async() => {
                 BeginContext(303, 5, true);
                 WriteLiteral("State");
                 EndContext();
@@ -137,7 +137,7 @@ using DevExtreme.AspNet.Mvc;
             WriteLiteral("</li>\r\n    </ul>\r\n\r\n    <ul class=\"nav navbar-nav\">\r\n        <li>");
             EndContext();
             BeginContext(377, 87, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "22596f685b4849d1b17e919fb22a9796", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bec1082dc0744f109c218308de3ad4ca", async() => {
                 BeginContext(449, 11, true);
                 WriteLiteral("Event Types");
                 EndContext();
@@ -162,7 +162,7 @@ using DevExtreme.AspNet.Mvc;
             WriteLiteral("</li>\r\n    </ul>\r\n    <ul class=\"nav navbar-nav\">\r\n        <li>");
             EndContext();
             BeginContext(527, 87, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c405b453de254339a89d631d076b02cf", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d024ecb368134fed9dfb6e80b9f62485", async() => {
                 BeginContext(600, 10, true);
                 WriteLiteral("Department");
                 EndContext();
@@ -190,7 +190,7 @@ using DevExtreme.AspNet.Mvc;
             WriteLiteral("\r\n    <ul class=\"nav navbar-nav\">\r\n        <li>");
             EndContext();
             BeginContext(857, 98, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b0fece6488964f59823bacf84cac3142", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "efed931a67a24764a11633222a648f73", async() => {
                 BeginContext(931, 20, true);
                 WriteLiteral("Holiday entitlements");
                 EndContext();
@@ -215,7 +215,7 @@ using DevExtreme.AspNet.Mvc;
             WriteLiteral("</li>\r\n    </ul>\r\n\r\n    <ul class=\"nav navbar-nav\">\r\n        <li>");
             EndContext();
             BeginContext(1020, 94, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d402a23ab3e24849ab1d95c261700fe2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "937aee80d0334b51a862b7134e370686", async() => {
                 BeginContext(1096, 14, true);
                 WriteLiteral("System Setting");
                 EndContext();

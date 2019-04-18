@@ -42,13 +42,13 @@ namespace HolidayWeb.Models
 
                 IdentityRole userIdentityRole = new IdentityRole();
                 userIdentityRole.Name = "user";
-                adminIdentityRole.NormalizedName = "USER";
+                userIdentityRole.NormalizedName = "USER";
                 context.Roles.Add(userIdentityRole);
                 context.SaveChanges();
 
                 IdentityRole managerIdentityRole = new IdentityRole();
                 managerIdentityRole.Name = "manager";
-                adminIdentityRole.NormalizedName = "MANAGER";
+                managerIdentityRole.NormalizedName = "MANAGER";
                 context.Roles.Add(managerIdentityRole);
                 context.SaveChanges();
 

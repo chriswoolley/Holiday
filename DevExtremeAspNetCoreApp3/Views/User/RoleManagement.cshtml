@@ -12,21 +12,21 @@ else
 {
     <table class="table table-condensed table-bordered">
         <tr>
-            <th>Role ID</th>
+            @*<th>Role ID</th>*@
             <th>Role name</th>
-            <th>#Users</th>
+            <th>Users</th>
         </tr>
         @foreach (var role in Model)
         {
             <tr>
-                <td>@role.Id</td>
+                @*<td>@role.Id</td>*@
                 <td>@role.Name</td>
                 <td>
                     <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
                         <a class="btn btn-sm btn-primary" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
-                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Do you really want to delete this role?');">
+                        @*<button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Do you really want to delete this role?');">
                             Delete
-                        </button>
+                        </button>*@
                     </form>
                 </td>
             </tr>
@@ -34,5 +34,5 @@ else
     </table>
 }
 <p>
-    <a class="btn btn-primary" asp-action="AddNewRole">Add new role</a>
+    @*<a class="btn btn-primary" asp-action="AddNewRole">Add new role</a>*@
 </p>

@@ -18,6 +18,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace HolidayWeb
 {
+    //dotnet publish --runtime linux-x64
     public class Startup
     {
         private IConfigurationRoot _configurationRoot;
@@ -43,10 +44,14 @@ namespace HolidayWeb
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(_configurationRoot.GetConnectionString("DefaultConnection")));
 
 
-            
+            //            services.AddDbContext<AppDbContext>(options =>
+            //                options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
+
+
+
 
             services.AddTransient<IDepartment, DepartmentRepository>();
             services.AddTransient<IEvent, EventRepository>();

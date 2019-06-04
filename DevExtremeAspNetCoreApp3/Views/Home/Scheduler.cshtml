@@ -39,7 +39,10 @@
                         //                                                                    .Views(new SchedulerViewType[] { SchedulerViewType.Day, SchedulerViewType.TimelineMonth, SchedulerViewType.WorkWeek, SchedulerViewType.Week, SchedulerViewType.Agenda })
                         .Views(new SchedulerViewType[] {SchedulerViewType.Week, SchedulerViewType.Month})
                         .CurrentView(SchedulerViewType.Week)
-                        .CurrentDate(new DateTime(2019, 3, 7))
+//                        .CurrentDate(new DateTime(2019, 3, 7))
+                        .CurrentDate(DateTime.Today)
+
+
                         .FirstDayOfWeek(FirstDayOfWeek.Sunday)
                         //                        .Editing()
 
@@ -108,7 +111,7 @@ new { id = 2, text = "Denied"}
     )
 
     @*currentid @currentID*@
-    signed in and admin @(SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    signed in and admin @(SignInManager.IsSignedIn(User) && User.IsInRole("admin"))
 </div>
 
 <script>
@@ -148,6 +151,7 @@ new { id = 2, text = "Denied"}
 
         var isSignedIn = '@(SignInManager.IsSignedIn(User))';
         var adminSignedIn = '@(SignInManager.IsSignedIn(User) && User.IsInRole("admin"))';
+        var managerSignedIn = '@(SignInManager.IsSignedIn(User) && User.IsInRole("manager"))';
 
         var option = 0;
         SelectUserId = "";
@@ -176,13 +180,13 @@ new { id = 2, text = "Denied"}
             SelectUserId = HolidayAppointment.UserID;
             SelectTypeId = HolidayAppointment.StatusKey;
             option = option + 8;
-            if (adminSignedIn == "True") {
+            if ((adminSignedIn == "True") || (managerSignedIn == "True")) {
                 DisplayReadOnly = false;
                 NewAppointmentOrAdminReadState = false;
                 option = option + 16;
             }
             else {
-                DisplayReadOnly = true; //((SelectUserId = currentUserId) && (SelectTypeId = 0));
+                DisplayReadOnly = ((SelectUserId = currentUserId) && (SelectTypeId = 0));
                 NewAppointmentOrAdminReadState = ((SelectUserId = currentUserId) && (SelectTypeId = 0));
                 option = option + 32;
             }

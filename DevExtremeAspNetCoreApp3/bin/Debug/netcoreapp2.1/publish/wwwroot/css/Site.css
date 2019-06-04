@@ -1,0 +1,95 @@
+﻿.dx-scheduler-all-day-table-row {
+    height: 150px;
+}
+
+/* Middle column */
+.column.middle {
+    width: 65%;
+}
+
+.column.right {
+    width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.llbutton {
+    background-color: #004990;
+    border: none;
+    color: #004990;
+    padding: 10px 124px 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 14px 2px;
+    cursor: pointer;
+}
+
+.llbtn-info {
+    padding: 1em 0.5em 1em 0.5em;
+    font-size: 12px;
+    color: #ffffff;
+    background-color: #004990;
+    border-color: #737e86;
+    /*background-color: #17a2b8;*/
+    /*border-color: #17a2b8;*/
+    display: inline-block;
+    width: 100%;
+}
+
+
+body {
+  padding-top: 1rem;
+}
+
+.bg-img {
+    /* The image used */
+    background-image: url("img_nature.jpg");
+    min-height: 380px;
+    /* Center and scale the image nicely */
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Needed to position the navbar */
+    position: relative;
+}
+
+
+.llbg-dark {
+    background-color: #004990 !important;
+}
+
+
+.llnavbar-dark .navbar-brand {
+    color: #fff;
+}
+
+
+
+meter::-webkit-meter-optimum-value {
+    box-shadow: 0 5px 5px -5px #999 inset;
+    background-image: linear-gradient( 90deg, #004990 5%, #737e86 100% );
+    background-size: 100% 100%;
+}
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #004990;
+    border-color: #0062cc
+}
+
+btn-primary:hover {
+    color: #fff;
+    background-color: #62aecb;
+    border-color: #0062cc
+}
+
+
+
+
